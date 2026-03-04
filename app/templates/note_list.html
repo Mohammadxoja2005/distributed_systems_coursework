@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Note App</title>
+</head>
+<body>
+    <h1>My Notes</h1>
+    <p>Logged in as: {{ user.username }}</p>
+    
+    <a href="{% url 'note_create' %}">+ New Note</a>
+    <hr>
+
+    {% for note in notes %}
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <h3>{{ note.title }}</h3>
+            <p>{{ note.content }}</p>
+            <form action="{% url 'note_delete' note.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    {% empty %}
+        <p>No notes yet.</p>
+    {% endfor %}
+
+    <br>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
