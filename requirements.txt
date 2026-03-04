@@ -1,0 +1,4 @@
+django==5.1.*
+django-mongodb-backend
+pymongo[srv]
+gunicorn
