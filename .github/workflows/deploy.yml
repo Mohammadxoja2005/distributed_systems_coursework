@@ -20,15 +20,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Navigate to the project directory
             cd /opt/services/django_mongo_project
-
-            # Pull the latest changes from GitHub
-            git pull origin main
-
-            # Rebuild and restart the containers
+            git pull origin master  # Ensure this also says master
             docker-compose up -d --build
-
-            # Run migrations and collect static files inside the web container
             docker-compose exec -T web python manage.py migrate
             docker-compose exec -T web python manage.py collectstatic --noinput
