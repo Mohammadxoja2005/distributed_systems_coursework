@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /opt/services/django_mongo_project
+            cd /opt/services/distributed_systems_coursework
             git pull origin master  # Ensure this also says master
             docker compose up -d --build
             docker compose exec -T web python manage.py migrate
